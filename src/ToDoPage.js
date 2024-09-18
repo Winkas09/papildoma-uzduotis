@@ -10,10 +10,18 @@ const ToDoPage = () => {
   };
 
   const toggleDone = (id) => {
-    setTodos((todos) =>
-      todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))
-    );
+    setTodos((todos) => {
+      const index = todos.findIndex((todo) => todo.id === id);
+      if (index !== -1) {
+        const updatedTodos = [...todos];
+        updatedTodos[index] = { ...updatedTodos[index], done: !updatedTodos[index].done };
+        return updatedTodos;
+      }
+      return todos;
+    });
   };
+
+  // find item reikes ir indexo
 
   const deleteTodo = (id) => {
     setTodos((todos) => todos.filter((todo) => todo.id !== id));
@@ -24,9 +32,10 @@ const ToDoPage = () => {
       <h2>To-Do List</h2>
       <ToDoForm addToDo={addToDo} />
       <ToDoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo} />
-      <h4>This To-Do list page was created by Edvinas</h4>
+      <h4>To-Do list page</h4>
     </div>
   );
 };
+// ontoggleToDo
 
 export default ToDoPage;

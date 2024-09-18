@@ -5,23 +5,25 @@ const ToDoForm = ({ addToDo }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const id = useId(); // Generate a unique ID
+  const id = useId();
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (title.trim() && description.trim() && dueDate) {
       const newTodo = {
-        id: `${id}-${Date.now()}`, // Combine useId with Date.now() for uniqueness
+        id: useId,
         title,
         description,
         dueDate,
-        creationDate: new Date().toLocaleDateString(), // Simpler date format
+        creationDate: new Date().toLocaleDateString(), // pasigilinti
         done: false,
       };
-      addToDo(newTodo); // Use addToDo here
+      addToDo(newTodo);
       setTitle("");
       setDescription("");
       setDueDate("");
+    } else {
+      console.error("Error: All fields are required");
     }
   };
 

@@ -20,7 +20,7 @@ const ToDoItem = ({ todo, deleteTodo, toggleDone }) => {
     <li className={`todo-item ${done ? "done" : ""}`}>
       <h3>{title}</h3>
       <p>{description}</p>
-      <p>Due date: {dueDate}</p>
+      <p>Due date: {new Date(dueDate).toLocaleDateString()}</p>
       <p>Created on: {new Date(creationDate).toLocaleDateString()}</p>
       <p>{remainingTime()}</p>
       <button onClick={() => toggleDone(id)}>{done ? "Undo" : "Done"}</button>
