@@ -1,24 +1,26 @@
-import { useState, useId } from "react";
+import React, { useState, useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { ToDoContext } from "./ToDoContext";
 import "./App.css";
 
-const ToDoForm = ({ addToDo }) => {
+const ToDoForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const id = useId();
+  const { addTodo } = useContext(ToDoContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (title.trim() && description.trim() && dueDate) {
       const newTodo = {
-        id: useId,
+        id: uuidv4(), // Generate a unique ID
         title,
         description,
         dueDate,
-        creationDate: new Date().toLocaleDateString(), // pasigilinti
+        creationDate: new Date().toLocaleDateString(),
         done: false,
       };
-      addToDo(newTodo);
+      addTodo(newTodo);
       setTitle("");
       setDescription("");
       setDueDate("");
@@ -37,8 +39,6 @@ const ToDoForm = ({ addToDo }) => {
         id="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        required
         className="form-input"
       />
       <label htmlFor="description" className="form-label">
@@ -49,8 +49,6 @@ const ToDoForm = ({ addToDo }) => {
         id="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-        required
         className="form-input"
       />
       <label htmlFor="dueDate" className="form-label">
@@ -61,11 +59,10 @@ const ToDoForm = ({ addToDo }) => {
         id="dueDate"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
-        required
         className="form-input"
       />
       <button type="submit" className="form-button">
-        Add
+        Add ToDo
       </button>
     </form>
   );

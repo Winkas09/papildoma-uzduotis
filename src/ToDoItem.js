@@ -1,5 +1,9 @@
-const ToDoItem = ({ todo, deleteTodo, toggleDone }) => {
+import React, { useContext } from "react";
+import { ToDoContext } from "./ToDoContext";
+
+const ToDoItem = ({ todo }) => {
   const { id, title, description, dueDate, creationDate, done } = todo;
+  const { deleteTodo, toggleDone } = useContext(ToDoContext);
 
   const remainingTime = () => {
     const now = new Date();
