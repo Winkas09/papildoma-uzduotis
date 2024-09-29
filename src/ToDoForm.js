@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { ToDoContext } from "./ToDoContext";
 import "./App.css";
 
@@ -13,7 +12,7 @@ const ToDoForm = () => {
     e.preventDefault();
     if (title.trim() && description.trim() && dueDate) {
       const newTodo = {
-        id: uuidv4(), // Generate a unique ID
+        id: Math.random(),
         title,
         description,
         dueDate,
